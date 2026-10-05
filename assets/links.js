@@ -16,7 +16,7 @@ const LINKS = {
     stlsGratis: "https://drive.google.com/drive/folders/1KEVqYll78dvHoo0AbDUCeM57MLXllw48?usp=sharing"
   },
   calculadora: {
-    site: "http://nossoprojeto3d.github.io/calc-3d/",
+    site: "https://nossoprojeto3d.github.io/calc-3d/",
     github: "https://github.com/nossoprojeto3d/calc-3d"
   },
   catalogo: {

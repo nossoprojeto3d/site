@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<script>document.documentElement.classList.add("js")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Nosso Projeto 3D — Impressão 3D personalizada</title>
 <meta name="description" content="Impressão 3D personalizada: peças sob medida, miniaturas, organizadores e decoração. Transformamos ideias em peças 3D personalizadas.">
@@ -33,7 +34,7 @@
   :root{
     --bg:#0E0B07; --bg-2:#141009; --surface:#18130C; --line:#2A2217; --line-2:#3A3226;
     --gold:#C9A227; --gold-2:#E8C873; --gold-dim:rgba(201,162,39,.14);
-    --text:#F4EFE3; --body:#C9C1B0; --muted:#A69C87; --faint:#786F5C;
+    --text:#F4EFE3; --body:#C9C1B0; --muted:#A69C87; --faint:#8A806B;
     --serif:'Fraunces',Georgia,serif; --sans:'Work Sans',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
     --ease:cubic-bezier(.2,.8,.2,1);
     --gutter:32px; --max:1120px;
@@ -72,15 +73,20 @@
   .section-head p{margin-top:18px;font-size:var(--fs-body-lg);line-height:1.7;color:var(--muted);}
   .gold-text{background:linear-gradient(100deg,var(--gold) 0%,var(--gold-2) 40%,var(--gold) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
   .facet{clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));}
+  /* o clip-path corta a borda nos cantos: redesenha as diagonais na cor de --bd (quem tem borda define --bd) */
+  @property --bd{syntax:"<color>";inherits:true;initial-value:transparent;}
+  .facet::after{content:"";position:absolute;inset:-1px;pointer-events:none;background-repeat:no-repeat;background-size:16px 16px;background-position:top right,bottom left;
+    background-image:linear-gradient(to bottom left,transparent 50%,var(--bd) 50%,var(--bd) calc(50% + 1px),transparent calc(50% + 1px)),
+      linear-gradient(to bottom left,transparent calc(50% - 1px),var(--bd) calc(50% - 1px),var(--bd) 50%,transparent 50%);}
 
   /* ---------- Botões ---------- */
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;font-family:var(--sans);font-weight:500;font-size:15px;
-    transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s ease,border-color .3s ease,color .3s ease;white-space:nowrap;}
+    transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s ease,--bd .3s ease,color .3s ease;white-space:nowrap;position:relative;}
   .btn svg{flex-shrink:0;}
-  .btn-primary{background:linear-gradient(135deg,var(--gold-2),var(--gold) 55%,#A8841A);color:#1A1308;}
+  .btn-primary{--bd:transparent;background:linear-gradient(135deg,var(--gold-2),var(--gold) 55%,#A8841A);color:#1A1308;}
   .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px -12px rgba(201,162,39,.6);}
-  .btn-ghost{border:1px solid var(--line-2);color:var(--text);}
-  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-2);transform:translateY(-2px);}
+  .btn-ghost{--bd:var(--line-2);border:1px solid var(--bd);color:var(--text);}
+  .btn-ghost:hover{--bd:var(--gold);color:var(--gold-2);transform:translateY(-2px);}
 
   /* ---------- Navegação ---------- */
   .nav{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .4s ease,border-color .4s ease,backdrop-filter .4s ease;border-bottom:1px solid transparent;}
@@ -191,9 +197,9 @@
   /* ---------- Serviços ---------- */
   .services{border-top:1px solid var(--line);}
   .services-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;}
-  .service{position:relative;padding:40px 32px 36px;background:linear-gradient(180deg,var(--surface),rgba(24,19,12,.2));border:1px solid var(--line);
-    transition:transform .45s var(--ease),border-color .45s ease;}
-  .service:hover{transform:translateY(-6px);border-color:var(--line-2);}
+  .service{--bd:var(--line);position:relative;padding:40px 32px 36px;background:linear-gradient(180deg,var(--surface),rgba(24,19,12,.2));border:1px solid var(--bd);
+    transition:transform .45s var(--ease),--bd .45s ease;}
+  .service:hover{transform:translateY(-6px);--bd:var(--line-2);}
   .service-num{display:block;font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.1em;}
   .service-icon{display:block;margin:32px 0 28px;width:56px;height:56px;}
   .service h3{font-size:var(--fs-h3);margin-bottom:12px;}
@@ -227,7 +233,7 @@
 
   /* ---------- CTA final ---------- */
   .cta{padding:0 0 120px;}
-  .cta-box{position:relative;overflow:hidden;border:1px solid var(--line-2);padding:88px 64px;text-align:center;
+  .cta-box{--bd:var(--line-2);position:relative;overflow:hidden;border:1px solid var(--bd);padding:88px 64px;text-align:center;
     background:radial-gradient(ellipse 60% 90% at 50% 0%,rgba(201,162,39,.16),transparent 70%),var(--bg-2);}
   .cta-box::before{content:"";position:absolute;inset:0;pointer-events:none;
     background-image:repeating-linear-gradient(0deg,rgba(201,162,39,.05) 0 1px,transparent 1px 8px);-webkit-mask-image:linear-gradient(transparent,#000 60%);mask-image:linear-gradient(transparent,#000 60%);}
@@ -243,14 +249,15 @@
   .footer-grid{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;}
   .footer-brand p{margin-top:16px;font-size:var(--fs-small);color:var(--muted);max-width:280px;line-height:1.6;}
   .footer-cols{display:flex;gap:72px;flex-wrap:wrap;}
-  .footer-col h4{font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin:0 0 18px;}
+  .footer-col h3{font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin:0 0 18px;}
   .footer-col a{display:block;font-size:var(--fs-small);color:var(--body);margin-bottom:12px;transition:color .25s ease;}
   .footer-col a:hover{color:var(--gold-2);}
   .footer-bottom{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--faint);}
 
   /* ---------- Revelar ao rolar ---------- */
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease);}
-  .reveal.in{opacity:1;transform:none;}
+  /* só esconde com JS ativo; sem JS o conteúdo aparece direto */
+  .js .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease);}
+  .js .reveal.in{opacity:1;transform:none;}
   .reveal-d1{transition-delay:.08s;} .reveal-d2{transition-delay:.16s;} .reveal-d3{transition-delay:.24s;} .reveal-d4{transition-delay:.32s;} .reveal-d5{transition-delay:.4s;}
 
   /* ---------- Responsivo ---------- */
@@ -335,12 +342,14 @@
       box-shadow:0 12px 30px -8px rgba(0,0,0,.7),0 0 0 1px rgba(232,200,115,.4);
       opacity:0;transform:translateY(16px) scale(.9);pointer-events:none;transition:opacity .35s ease,transform .35s var(--ease);}
     .wa-float.show{opacity:1;transform:none;pointer-events:auto;}
+    /* enquanto o aviso de cookies está na tela, o botão espera */
+    body:has(#np3d-cookies) .wa-float.show{opacity:0;transform:translateY(16px) scale(.9);pointer-events:none;}
   }
 
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.01ms !important;animation-delay:0s !important;transition-duration:.01ms !important;}
     html{scroll-behavior:auto;}
-    .reveal{opacity:1;transform:none;}
+    .js .reveal{opacity:1;transform:none;}
     .printer-build{animation:none;height:100%;}
     .printer-logo{animation:none;opacity:1;}
     .printer-head{display:none;}
@@ -611,18 +620,18 @@
       </div>
       <div class="footer-cols">
         <div class="footer-col">
-          <h4>Loja</h4>
+          <h3>Loja</h3>
           <a href="#" data-link="catalogo.site">Catálogo</a>
           <a href="#" data-link="hub.shopee">Shopee</a>
           <a href="#" data-link="hub.stlsGratis">STLs grátis</a>
         </div>
         <div class="footer-col">
-          <h4>Ferramentas</h4>
+          <h3>Ferramentas</h3>
           <a href="#" data-link="calculadora.site">Calculadora</a>
           <a href="#" data-link="calculadora.github">GitHub</a>
         </div>
         <div class="footer-col">
-          <h4>Contato</h4>
+          <h3>Contato</h3>
           <a href="#" data-link="contato.whatsapp">WhatsApp</a>
           <a href="#" data-link="contato.instagram">Instagram</a>
         </div>
