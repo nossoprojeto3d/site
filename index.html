@@ -347,8 +347,9 @@
     .printer-stage::before{animation:none;opacity:1;}
   }
 </style>
+<script src="assets/medicao.js" defer></script>
 </head>
-<body>
+<body data-medir-secoes>
 
 <!-- Ícones reutilizados -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -379,7 +380,7 @@
 <main id="topo">
 
   <!-- Hero -->
-  <section class="hero">
+  <section class="hero" id="inicio">
     <div class="container hero-grid">
       <div class="hero-in">
         <span class="eyebrow">Impressão 3D sob medida</span>
@@ -431,7 +432,7 @@
   </section>
 
   <!-- Acesso rápido -->
-  <section class="links" aria-labelledby="links-title">
+  <section class="links" id="acesso-rapido" aria-labelledby="links-title">
     <div class="container">
       <h2 id="links-title" class="eyebrow reveal" style="font-family:var(--mono);font-weight:400;margin-bottom:28px;">Acesso rápido</h2>
       <div class="links-grid">
@@ -577,7 +578,7 @@
   </section>
 
   <!-- CTA final + onde estamos -->
-  <section class="cta">
+  <section class="cta" id="contato">
     <div class="container">
       <div class="cta-box facet reveal">
         <span class="eyebrow">Vamos criar juntos</span>
