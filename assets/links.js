@@ -41,4 +41,35 @@ function applyLinks() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", applyLinks);
+/**
+ * Dados do negócio para o Google (schema.org/LocalBusiness), montados a partir
+ * dos LINKS acima pra nenhuma URL ficar repetida no HTML. Só roda nas páginas
+ * com data-schema-negocio no <body>.
+ */
+function applySchema() {
+  if (!document.body.hasAttribute("data-schema-negocio")) return;
+  const site = "https://nossoprojeto3d.github.io/site/";
+  const dados = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Nosso Projeto 3D",
+    description: "Impressão 3D personalizada: peças sob medida, miniaturas, decoração e organizadores.",
+    url: site,
+    logo: site + "assets/logo.png",
+    image: site + "assets/og/og-image.jpg",
+    telephone: "+55 62 99315-2843",
+    address: { "@type": "PostalAddress", addressLocality: "Goiânia", addressRegion: "GO", addressCountry: "BR" },
+    areaServed: [{ "@type": "City", name: "Goiânia" }, { "@type": "Country", name: "Brasil" }],
+    founder: [{ "@type": "Person", name: "Júnior" }, { "@type": "Person", name: "Thairine" }],
+    sameAs: [LINKS.contato.instagram, LINKS.hub.shopee, LINKS.catalogo.site]
+  };
+  const el = document.createElement("script");
+  el.type = "application/ld+json";
+  el.textContent = JSON.stringify(dados);
+  document.head.appendChild(el);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  applyLinks();
+  applySchema();
+});
