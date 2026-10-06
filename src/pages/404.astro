@@ -1,0 +1,28 @@
+---
+import Base from "../layouts/Base.astro";
+import { LINKS, url } from "../data/links";
+---
+<Base titulo="Página não encontrada — Nosso Projeto 3D" descricao="A página que você procurou não existe ou mudou de lugar." semIndice>
+  <section class="erro">
+    <div class="container">
+      <span class="eyebrow">Erro 404</span>
+      <h1>Essa peça <em class="gold-text">não saiu da impressora.</em></h1>
+      <p>A página que você procurou não existe ou mudou de lugar. Mas o resto do site está inteiro.</p>
+      <div class="ctas">
+        <a href={url()} class="btn btn-primary facet">Voltar ao início</a>
+        <a href={LINKS.catalogo.site} data-link="catalogo.site" target="_blank" rel="noopener noreferrer" class="btn btn-ghost facet">Ver catálogo</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .erro{padding:96px 0 140px;text-align:center;}
+  .eyebrow{justify-content:center;}
+  .eyebrow::after{content:"";width:28px;height:1px;background:var(--gold);}
+  h1{margin:24px auto 0;font-size:var(--fs-display);line-height:1.05;font-weight:300;max-width:14ch;}
+  h1 em{font-style:italic;font-weight:400;}
+  p{margin:24px auto 0;max-width:440px;font-size:var(--fs-body-lg);line-height:1.7;color:var(--muted);}
+  .ctas{justify-content:center;margin-top:40px;}
+  @media (max-width:760px){ .erro{padding:56px 0 96px;} }
+</style>

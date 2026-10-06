@@ -1,0 +1,104 @@
+---
+import Base from "../layouts/Base.astro";
+import Impressora from "../components/Impressora.astro";
+import QuemSomos from "../components/QuemSomos.astro";
+import Entrega from "../components/Entrega.astro";
+import Projetos from "../components/Projetos.astro";
+import { LINKS, url } from "../data/links";
+
+const ext = { target: "_blank", rel: "noopener noreferrer" };
+---
+<Base
+  titulo="Nosso Projeto 3D — Impressão 3D em Goiânia"
+  descricao="Brindes com logo e expositores para empresas. Peças personalizadas, miniaturas e decoração para você. Goiânia-GO, com envio para todo o Brasil."
+  schema
+>
+  <section class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div class="hero-txt">
+        <span class="eyebrow">Impressão 3D em Goiânia</span>
+        <h1>Ideias que ganham forma, <em class="gold-text">camada por camada.</em></h1>
+        <p class="lead">Impressão 3D com precisão em cada detalhe e cuidado em cada acabamento.</p>
+        <div class="ctas">
+          <a href={LINKS.catalogo.site} data-link="catalogo.site" {...ext} class="btn btn-primary facet">Comprar no catálogo <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a href={LINKS.contato.whatsapp} data-link="contato.whatsapp" {...ext} class="btn btn-ghost facet"><svg width="17" height="17" aria-hidden="true"><use href="#i-whatsapp"/></svg>Falar no WhatsApp</a>
+        </div>
+      </div>
+      <Impressora />
+    </div>
+  </section>
+
+  <section class="sec" id="caminhos" aria-label="Escolha seu caminho">
+    <div class="container portas">
+      <a class="porta porta-empresa surge" href={url("empresas/")}>
+        <span class="eyebrow">Para empresas</span>
+        <h2>Brindes e expositores com a cara da sua marca.</h2>
+        <p>Chaveiros, porta-cartões e kits com a sua logo. Displays e placas para o seu ponto de venda.</p>
+        <span class="porta-link">Ver soluções para empresas <svg width="18" height="18" aria-hidden="true"><use href="#i-right"/></svg></span>
+      </a>
+      <a class="porta porta-evento surge" href={url("eventos/")}>
+        <span class="eyebrow">Para eventos</span>
+        <h2>Lembrancinhas e decoração no tema da sua festa.</h2>
+        <p>Casamentos, aniversários, chás e batizados, nas cores e com o nome de quem celebra.</p>
+        <span class="porta-link">Ver ideias para eventos <svg width="18" height="18" aria-hidden="true"><use href="#i-right"/></svg></span>
+      </a>
+      <a class="porta surge" href={url("para-voce/")}>
+        <span class="eyebrow">Para você</span>
+        <h2>Do que você imaginou ao que você precisa.</h2>
+        <p>Peças sob medida, miniaturas, decoração e organizadores, feitos um a um.</p>
+        <span class="porta-link">Pedir uma peça sob medida <svg width="18" height="18" aria-hidden="true"><use href="#i-right"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+  <Projetos />
+
+  <Entrega />
+
+  <QuemSomos />
+</Base>
+
+<style>
+  .hero{position:relative;padding:56px 0 96px;overflow:hidden;}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(ellipse 70% 60% at 70% 45%,#000 10%,transparent 75%);mask-image:radial-gradient(ellipse 70% 60% at 70% 45%,#000 10%,transparent 75%);opacity:.5;}
+  .hero::after{content:"";position:absolute;width:780px;height:780px;right:-160px;top:50%;transform:translateY(-50%);pointer-events:none;background:radial-gradient(circle,rgba(201,162,39,.16),transparent 62%);}
+  .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center;}
+  .hero-txt > *{opacity:0;transform:translateY(18px);animation:sobe .9s var(--ease) forwards;}
+  .hero-txt > :nth-child(2){animation-delay:.1s;} .hero-txt > :nth-child(3){animation-delay:.2s;} .hero-txt > :nth-child(4){animation-delay:.3s;}
+  @keyframes sobe{to{opacity:1;transform:none;}}
+  h1{font-size:var(--fs-display);line-height:1.04;font-weight:300;margin-top:26px;}
+  h1 em{font-style:italic;font-weight:400;}
+  .lead{margin-top:24px;max-width:470px;font-size:var(--fs-body-lg);line-height:1.7;color:var(--body);}
+  .ctas{margin-top:36px;}
+
+  /* os caminhos continuam o topo, sem divisória nem respiro dobrado */
+  #caminhos{border-top:0;padding-top:0;}
+  .portas{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .porta{position:relative;display:flex;flex-direction:column;min-height:420px;padding:40px 32px 34px;border:1px solid var(--line-2);background:var(--bg-2);overflow:hidden;
+    transition:border-color .4s ease,transform .5s var(--ease);}
+  .porta:hover{border-color:var(--gold);transform:translateY(-4px);}
+  .porta-empresa{background:radial-gradient(ellipse 90% 70% at 100% 0%,var(--gold-dim),transparent 60%),var(--bg-2);}
+  .porta-evento{background:radial-gradient(ellipse 90% 70% at 50% 100%,var(--gold-dim),transparent 60%),var(--bg-2);}
+  .porta h2{margin-top:22px;font-size:clamp(26px,1.4vw + 16px,36px);line-height:1.1;font-weight:300;max-width:15ch;}
+  .porta p{margin-top:18px;color:var(--muted);line-height:1.7;font-size:var(--fs-body-lg);max-width:40ch;}
+  .porta-link{margin-top:auto;padding-top:36px;display:flex;align-items:center;gap:10px;color:var(--gold-2);font-weight:500;}
+  .porta-link svg{transition:transform .35s var(--ease);}
+  .porta:hover .porta-link svg{transform:translateX(4px);}
+
+
+  @media (max-width:980px){
+    .hero-grid{grid-template-columns:1fr;gap:40px;}
+    .hero-grid :global(.printer){order:-1;}
+    .portas{grid-template-columns:1fr;}
+  }
+  @media (max-width:760px){
+    .hero{padding:20px 0 64px;}
+    .hero-grid{gap:28px;}
+    h1{margin-top:18px;}
+    .lead{margin-top:16px;}
+    .ctas{margin-top:26px;}
+    .porta{min-height:0;padding:32px 24px 28px;}
+  }
+</style>
