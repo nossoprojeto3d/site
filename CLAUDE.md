@@ -9,6 +9,7 @@ Todo push na `main` vai direto pro ar. HTML, CSS e JS puros, sem build e sem lib
 - `assets/links.js`: **toda URL externa do site fica aqui**, no objeto `LINKS`. No HTML, o link é `data-link="grupo.chave"` e o `applyLinks()` preenche o `href`. Para trocar ou criar um link, mexa só nesse arquivo e nunca escreva a URL direto no HTML. O `applySchema()` também fica aqui: monta os dados do negócio para o Google (schema.org `LocalBusiness`: Goiânia-GO, telefone, Instagram) a partir do `LINKS`, nas páginas com `data-schema-negocio` no `<body>`.
 - `404.html`: página de erro. O GitHub Pages a serve em qualquer endereço inexistente dentro de `/site/`, então ela usa caminhos absolutos (`/site/assets/...`).
 - `sitemap.xml`: atualize o `lastmod` quando o conteúdo mudar. Não existe `robots.txt`, porque ele só valeria na raiz do domínio (`nossoprojeto3d.github.io/`), que não é deste repositório. O sitemap é enviado pelo Google Search Console.
+- `googlee4343bf2118f52f0.html`: prova pro Google Search Console de que o site é nosso. Não apagar nem renomear, senão o Google perde a verificação.
 - `assets/medicao.js`: Google Analytics 4 com aviso de cookies. É o mesmo arquivo em todos os projetos; se mudar aqui, avisar que precisa copiar pros outros.
 - `assets/og/og-image.html`: fonte da imagem de compartilhamento. Depois de editar, gere de novo o `og-image.jpg` em 1200×630 com Chrome headless ou print.
 - `assets/icons/`: favicons e o ícone da tela de início.
